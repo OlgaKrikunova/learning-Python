@@ -11,6 +11,21 @@ user_input = input("Введите, пожалуйста, номер месяц�
 month = int(user_input)
 print('Вы ввели', month)
 
-# TODO здесь ваш код
-
-
+if month == 1:
+    print('31')
+elif month == 2:
+    print('28')
+elif month == 3:
+    print('31')
+elif month == 4:
+    print('30')
+elif month == 5:
+    print('31')
+elif month == 6:
+    print('30')
+elif month < -1:
+    print('gfsgsh')
+elif month == 0:
+    print('sdgg')
+else:
+    print('klsdghghlagh;')
