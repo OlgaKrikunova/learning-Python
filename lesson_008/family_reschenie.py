@@ -25,10 +25,10 @@ class People:
         self.house = home
 
     def eat(self):
-        if self.house.food >= 20:
+        if self.house.food >= 10:
             print('{} поел'.format(self.name))
-            self.fullness += 20
-            self.house.food -= 20
+            self.fullness += 10
+            self.house.food -= 10
             self.house.dirt_in_house += 5
 
         else:
@@ -50,6 +50,7 @@ class Husband(People):
         print('{} сходил на работу.'.format(self.name))
         self.house.money += 150
         self.fullness -= 10
+        self.happiness -= 20
 
     def gaming(self):
         print('{} весь день играл в компьютерные игры.'.format(self.name))
@@ -66,7 +67,7 @@ class Husband(People):
             return
         if self.fullness < 20:
             self.eat()
-        elif self.house.money < 200:
+        elif self.house.money <= 400:
             self.work()
         else:
             self.gaming()
@@ -83,24 +84,26 @@ class Wife(People):
     def shopping(self):
         if self.house.money > 70:
             print('{} сходила в магазин за продуктами.'.format(self.name))
-            self.house.food += 50
-            self.house.money -= 50
+            self.house.food += 60
+            self.house.money -= 60
             self.fullness -= 10
+
         else:
             print('{} деньги кончились!'.format(self.name))
 
     def buy_fur_coat(self):
-        if self.happiness < 40 and self.house.money > 400:
+        if self.house.money > 350:
             print('{} сходила в магазин за шубой.'.format(self.name))
             self.happiness += 60
             self.house.money -= 350
             self.fullness -= 10
 
     def clean_house(self):
-        if self.house.dirt_in_house > 80:
+        if self.house.dirt_in_house > 100:
             print('{} убрался в доме'.format(self.name))
             self.house.dirt_in_house -= 80
             self.fullness -= 10
+            self.happiness -= 10
 
     def act(self):
         if self.fullness < 10:
@@ -111,11 +114,11 @@ class Wife(People):
             return
         if self.fullness < 20:
             self.eat()
-        elif self.happiness < 20:
+        elif self.happiness < 50:
             self.buy_fur_coat()
-        elif self.house.dirt_in_house > 80:
+        elif self.house.dirt_in_house > 100:
             self.clean_house()
-        elif self.house.food < 30:
+        elif self.house.food <= 10:
             self.shopping()
 
 
