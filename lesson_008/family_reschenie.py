@@ -8,6 +8,9 @@ class House:
         self.money = 100
         self.food = 50
         self.dirt_in_house = 0
+        self.coats = 0
+        self.geld = 0
+        self.foods = 0
 
     def __str__(self):
         return 'В доме еды осталось {}, денег осталось {}, грязи {}'.format(
@@ -18,6 +21,8 @@ home = House()
 
 
 class People:
+    food = 0
+
     def __init__(self, name):
         self.name = name
         self.fullness = 30
@@ -27,9 +32,11 @@ class People:
     def eat(self):
         if self.house.food >= 10:
             print('{} поел'.format(self.name))
-            self.fullness += 10
-            self.house.food -= 10
+            self.fullness += 20
+            self.house.food -= 20
             self.house.dirt_in_house += 5
+            self.house.foods += 20
+
 
         else:
             print('{} нет еды'.format(self.name))
@@ -39,6 +46,7 @@ class People:
 
 
 class Husband(People):
+
     def __init__(self, name, profession):
         super().__init__(name)
         self.profession = profession
@@ -51,6 +59,7 @@ class Husband(People):
         self.house.money += 150
         self.fullness -= 10
         self.happiness -= 20
+        self.house.geld += 150
 
     def gaming(self):
         print('{} весь день играл в компьютерные игры.'.format(self.name))
@@ -88,6 +97,7 @@ class Wife(People):
             self.house.money -= 60
             self.fullness -= 10
 
+
         else:
             print('{} деньги кончились!'.format(self.name))
 
@@ -97,6 +107,7 @@ class Wife(People):
             self.happiness += 60
             self.house.money -= 350
             self.fullness -= 10
+            self.house.coats += 1
 
     def clean_house(self):
         if self.house.dirt_in_house > 100:
@@ -132,3 +143,6 @@ for day in range(1, 366):
     print(serge)
     print(masha)
     print(home)
+print()
+print('Всего заработано денег {}, всего съедено еды {},'
+      ' всего куплено шуб {}.'.format(home.geld, home.foods, home.coats))
