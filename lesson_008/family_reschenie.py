@@ -43,7 +43,7 @@ class Family:
             print('{} нет еды'.format(self.name))
 
     def __str__(self):
-        return 'Я - {}, сытость - {}, счастье - {}'.format(
+        return 'Я - {}, сытость  {}, счастье  {}'.format(
             self.name, self.fullness, self.happiness)
 
 
@@ -197,8 +197,6 @@ class Child(Family):
             print('{} поел'.format(self.name))
             self.fullness += 10
             self.house.food -= 10
-
-
 
     def sleep(self):
         if self.fullness > 10:
