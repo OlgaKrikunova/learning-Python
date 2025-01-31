@@ -20,7 +20,7 @@ class House:
 home = House()
 
 
-class People:
+class Family:
     food = 0
 
     def __init__(self, name):
@@ -37,15 +37,14 @@ class People:
             self.house.dirt_in_house += 5
             self.house.foods += 20
 
-
         else:
             print('{} нет еды'.format(self.name))
 
     def __str__(self):
-        return 'Я - {}, сытость - {}, счастье - {}'.format(self.name, self.fullness, self.happiness)
+        return 'Я - {}, сытость  {}, счастье  {}'.format(self.name, self.fullness, self.happiness)
 
 
-class Husband(People):
+class Husband(Family):
 
     def __init__(self, name, profession):
         super().__init__(name)
@@ -82,7 +81,7 @@ class Husband(People):
             self.gaming()
 
 
-class Wife(People):
+class Wife(Family):
 
     def __init__(self, name):
         super().__init__(name)
@@ -97,9 +96,6 @@ class Wife(People):
             self.house.money -= 60
             self.fullness -= 10
 
-
-        else:
-            print('{} деньги кончились!'.format(self.name))
 
     def buy_fur_coat(self):
         if self.house.money > 350:
@@ -129,20 +125,49 @@ class Wife(People):
             self.buy_fur_coat()
         elif self.house.dirt_in_house > 100:
             self.clean_house()
-        elif self.house.food <= 10:
+        elif self.house.food <= 20:
             self.shopping()
+
+
+class Child(Family):
+
+    def __str__(self):
+        return super().__str__()
+
+    def eat(self):
+        if self.house.food > 10:
+            print('{} поел'.format(self.name))
+            self.fullness += 10
+            self.house.food -= 10
+
+
+
+    def sleep(self):
+        if self.fullness > 10:
+            print('{} спит'.format(self.name))
+            self.fullness -= 10
+
+    def act(self):
+        if self.fullness <= 10:
+            self.eat()
+        else:
+            self.sleep()
 
 
 serge = Husband(name='Сережа', profession="айтишник")
 masha = Wife(name='Маша')
+kind = Child(name='Чиловый парень')
 
 for day in range(1, 366):
     print('================== День {} =================='.format(day))
     serge.act()
     masha.act()
+    kind.act()
     print(serge)
     print(masha)
+    print(kind)
     print(home)
+
 print()
 print('Всего заработано денег {}, всего съедено еды {},'
       ' всего куплено шуб {}.'.format(home.geld, home.foods, home.coats))
