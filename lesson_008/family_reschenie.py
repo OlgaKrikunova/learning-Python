@@ -7,14 +7,16 @@ class House:
     def __init__(self):
         self.money = 100
         self.food = 50
+        self.cat_food = 30
         self.dirt_in_house = 0
         self.coats = 0
         self.geld = 0
         self.foods = 0
 
     def __str__(self):
-        return 'В доме еды осталось {}, денег осталось {}, грязи {}'.format(
-            self.food, self.money, self.dirt_in_house)
+        return ('В доме еды осталось {}, денег осталось {}, грязи {}, '
+                'еды кошака осталось {}').format(self.food, self.money,
+                                                 self.dirt_in_house, self.cat_food)
 
 
 home = House()
@@ -41,7 +43,8 @@ class Family:
             print('{} нет еды'.format(self.name))
 
     def __str__(self):
-        return 'Я - {}, сытость  {}, счастье  {}'.format(self.name, self.fullness, self.happiness)
+        return 'Я - {}, сытость - {}, счастье - {}'.format(
+            self.name, self.fullness, self.happiness)
 
 
 class Husband(Family):
@@ -66,6 +69,10 @@ class Husband(Family):
         self.happiness += 20
         self.house.dirt_in_house += 5
 
+    def pet_cat(self):
+        print('{} погладил кота'.format(self.name))
+        self.happiness += 5
+
     def act(self):
         if self.fullness < 10:
             print('{} умер...'.format(self.name))
@@ -73,11 +80,14 @@ class Husband(Family):
         if self.happiness < 10:
             print('{} умер...'.format(self.name))
             return
-        if self.fullness < 20:
+        dice = randint(1, 6)
+        if self.fullness <= 20:
             self.eat()
         elif self.house.money <= 400:
             self.work()
-        else:
+        elif self.happiness >= 10:
+            self.pet_cat()
+        elif dice == 6:
             self.gaming()
 
 
@@ -95,7 +105,12 @@ class Wife(Family):
             self.house.food += 60
             self.house.money -= 60
             self.fullness -= 10
+            self.happiness -= 5
 
+        if self.house.money > 70:
+            print('{} сходила в магазин за едой кошаку.'.format(self.name))
+            self.house.cat_food += 20
+            self.house.money -= 20
 
     def buy_fur_coat(self):
         if self.house.money > 350:
@@ -112,6 +127,10 @@ class Wife(Family):
             self.fullness -= 10
             self.happiness -= 10
 
+    def pet_cat(self):
+        print('{} погладил кота'.format(self.name))
+        self.happiness += 5
+
     def act(self):
         if self.fullness < 10:
             print('{} умер...'.format(self.name))
@@ -127,6 +146,45 @@ class Wife(Family):
             self.clean_house()
         elif self.house.food <= 20:
             self.shopping()
+        elif self.house.cat_food <= 10:
+            self.shopping()
+        dice = randint(1, 8)
+        if dice == 1:
+            self.pet_cat()
+
+
+class Cat(Family):
+
+    def __str__(self):
+        return super().__str__()
+
+    def eat(self):
+        if self.house.cat_food > 10:
+            print('{} поел'.format(self.name))
+            self.fullness += 20
+            self.house.cat_food -= 10
+
+    def slip(self):
+        if self.fullness > 10:
+            print('{} спал'.format(self.name))
+            self.fullness -= 10
+
+    def wallpaper(self):
+        if self.fullness > 10:
+            print('{} дерет обои'.format(self.name))
+            self.fullness -= 10
+            self.house.dirt_in_house += 5
+
+    def act(self):
+        if self.fullness < 10:
+            print('{} умер...'.format(self.name))
+            return
+        if self.fullness <= 10:
+            self.eat()
+        elif self.fullness > 30:
+            self.slip()
+        else:
+            self.wallpaper()
 
 
 class Child(Family):
@@ -156,6 +214,7 @@ class Child(Family):
 
 serge = Husband(name='Сережа', profession="айтишник")
 masha = Wife(name='Маша')
+cit = Cat(name='Котэ')
 kind = Child(name='Чиловый парень')
 
 for day in range(1, 366):
@@ -163,9 +222,11 @@ for day in range(1, 366):
     serge.act()
     masha.act()
     kind.act()
+    cit.act()
     print(serge)
     print(masha)
     print(kind)
+    print(cit)
     print(home)
 
 print()
