@@ -35,16 +35,24 @@ class Statistics:
         total = sum(self.stat.values())
         print(f"| {'Итого':^9} | {total:^9} |")
 
-statistics = Statistics(file_name='voyna-i-mir.txt')
+
+class Ordering(Statistics):
+
+    def ascending(self):
+        for letter, count in sorted(self.stat.items(), key=lambda item: item[1]):
+            print(f"| {letter:^9} | {count:^9} |")
+
+
+
+# statistics = Statistics(file_name='voyna-i-mir.txt')
+ordering = Ordering(file_name='voyna-i-mir.txt')
 
 print(f"статистика по буквам в романе Война и Мир")
 print()
 print('+', '-' * 9, '+', '-' * 9, '+')
-statistics.check()
-statistics.console_output()
-statistics.total()
+ordering.check()
+ordering.console_output()
+ordering.total()
 print('+', '-' * 9, '+', '-' * 9, '+')
 
-
-
-
+ordering.ascending()
