@@ -41,18 +41,31 @@ class Ordering(Statistics):
     def ascending(self):
         for letter, count in sorted(self.stat.items(), key=lambda item: item[1]):
             print(f"| {letter:^9} | {count:^9} |")
+            print("_" * 25)
 
+
+class Descending(Statistics):
+    def sorted_revers(self):
+        for letter, count in sorted(self.stat.items(), reverse=True):  # Сортируем по алфавиту в обратном порядке
+            print(f"| {letter:^9} | {count:^9} |")
+            print("_" * 25)
 
 
 # statistics = Statistics(file_name='voyna-i-mir.txt')
 ordering = Ordering(file_name='voyna-i-mir.txt')
+descending = Descending(file_name='voyna-i-mir.txt')
 
-print(f"статистика по буквам в романе Война и Мир")
-print()
+print(f"статистика по буквам в романе Война и Мир (в алфавитном порядке)")
 print('+', '-' * 9, '+', '-' * 9, '+')
 ordering.check()
 ordering.console_output()
 ordering.total()
 print('+', '-' * 9, '+', '-' * 9, '+')
-
+print(f"статистика по буквам в романе Война и Мир (в порядке возрастания числа)")
+print('+', '-' * 9, '+', '-' * 9, '+')
 ordering.ascending()
+print('+', '-' * 9, '+', '-' * 9, '+')
+print()
+print(f"статистика по буквам в романе Война и Мир (в алфавитном порядке по убыванию)")
+descending.check()
+descending.sorted_revers()
