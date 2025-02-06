@@ -31,7 +31,9 @@ class Statistics:
             print(f"| {letter:^9} | {count:^9} |")
             print("_" * 25)
 
-        # total = sum(self.stat.values())
+    def total(self):
+        total = sum(self.stat.values())
+        print(f"| {'Итого':^9} | {total:^9} |")
 
 statistics = Statistics(file_name='voyna-i-mir.txt')
 
@@ -40,8 +42,9 @@ print()
 print('+', '-' * 9, '+', '-' * 9, '+')
 statistics.check()
 statistics.console_output()
+statistics.total()
 print('+', '-' * 9, '+', '-' * 9, '+')
 
-# print(total)
+
 
 
