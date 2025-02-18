@@ -37,7 +37,6 @@ def one_day():
     while carma_level < ENLIGHTENMENT_CARMA_LEVEL:
         rand_number = randint(1, 13)
         if rand_number != 13:
-
             carma_level += randint(1, 7)
         elif rand_number == 13:
             try:
