@@ -24,8 +24,8 @@ def validate_email(line):
         raise ValueError(f"поле возраст НЕ является числом от 10 до 99")
 
 
-with open('registrations.txt', 'r', encoding='utf8') as ff, open('registrations_good.log.txt', 'w', encoding='utf8') as good_line, open(
-        'registrations_bad.log', 'w', encoding='utf8') as bad_line:
+with open('registrations.txt', 'r', encoding='utf8') as ff, open('registrations_good.log.txt', 'w', encoding='utf8'
+                ) as good_line, open('registrations_bad.log', 'w', encoding='utf8') as bad_line:
     for line in ff:
         line = line[:-1]
         try:
